@@ -1,2 +1,2 @@
 # Record-Applications
-Personal Web App to record job/internship applications.
+Personal Web Application to record job/internship applications.

@@ -1,5 +1,7 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
+app.use(cors());
 
 let database = [
     {
@@ -18,7 +20,7 @@ app.get('/', (request, response) => {
     response.send('<h1>This is the home page. Nodemon is working</h1>');
 })
 
-app.get('/database', (request, response) => {
+app.get('/api/database', (request, response) => {
     response.json(database);
 })
 

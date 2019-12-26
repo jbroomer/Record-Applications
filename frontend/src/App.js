@@ -1,53 +1,40 @@
 import React, { useState, useEffect } from 'react'
-import AppService from './services/apps'
-import AddApp from './components/AddApp'
-import MyApps from './components/MyApps'
+import AddAppPage from './components/AddAppPage'
+import ViewAppPage from './components/ViewAppPage'
+import MyNavbar from './components/MyNavbar'
+import HomePage from './components/HomePage'
+import Login from './components/Login'
+import Account from './components/Account'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter
+} from 'react-router-dom'
 
 const App = () => {
-  const [databases, setDatabases] = useState([]);
-  const [newApp, setNewApp] = useState('');
-  const [newAge, setNewAge] = useState('');
+  const [companies, setCompanies] = useState([]);
+  const [newName, setNewName] = useState('');
+  const [newURL, setNewURL] = useState('');
+  const [newLocation, setNewLocation] = useState('');
+  const [startPeriod, newStartPeriod] = useState('');
 
-  const hook = () => {
-    AppService
-      .getApp()
-      .then(initApp => {
-        setDatabases(initApp);
-      })
-  }
-  useEffect(hook, []);
-
-  const addApp = (event) => {
-    event.preventDefault();
-    
-    const AppObject = {
-      name: newApp.trim(),
-      age: newAge,
-    }
-
-    AppService
-      .createApp(AppObject)
-      .then(data => {
-        console.log(data);
-        setDatabases(databases.concat(data));
-        setNewApp('');
-        setNewAge('');
-      })
-  }
-
-  const handleAppChange = (event) => {
-    setNewApp(event.target.value);
-  }
-
-  const handleAgeChange = (event) => {
-    setNewAge(event.target.value);
+  const myDebugger = () => {
+    console.log('this is my debugger');
   }
 
   return (
     <div>
-      <h2>Apps</h2>
-      <AddApp newApp={newApp} handleAppChange={handleAppChange} newAge={newAge} handleAgeChange={handleAgeChange} addApp={addApp} />
-      <MyApps databases={databases} />
+      <Router>
+        <div>
+          <MyNavbar />
+          <Route exact path="/" render={() => <HomePage />} />
+          <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} newStartPeriod={newStartPeriod} companies={companies} setCompanies={setCompanies} />} />
+          <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
+          <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/account" render={() => <Account />} />
+        </div>
+      </Router>
+      <button onClick={myDebugger}>Debug</button>
     </div>
   )
 }

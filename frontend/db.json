@@ -1,24 +1,13 @@
 {
-  "database": [
+  "view": [
     {
-      "name": "Jack",
-      "age": "20",
+      "name": "Google",
+      "location": "NY",
+      "url": "http://www.google.com",
+      "date": "12/26/2019",
+      "period": "Summer 2020",
+      "status": "In Review",
       "id": 1
-    },
-    {
-      "name": "Jill",
-      "age": "21",
-      "id": 2
-    },
-    {
-      "name": "Bill",
-      "age": "20",
-      "id": 3
-    },
-    {
-      "name": "Chill",
-      "age": "22",
-      "id": 4
     }
   ]
 }

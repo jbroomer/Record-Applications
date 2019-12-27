@@ -3,8 +3,9 @@ import AddAppPage from './components/AddAppPage'
 import ViewAppPage from './components/ViewAppPage'
 import MyNavbar from './components/MyNavbar'
 import HomePage from './components/HomePage'
-import Login from './components/Login'
 import Account from './components/Account'
+import Login from './components/Login'
+import Signup from './components/Signup'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import {
@@ -32,10 +33,10 @@ const App = () => {
           <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
           <Route exact path="/login" render={() => <Login />} />
+          <Route exact path="/signup" render={() => <Signup />} />
           <Route exact path="/account" render={() => <Account />} />
         </div>
       </Router>
-      <button onClick={myDebugger}>Debug</button>
     </div>
   )
 }

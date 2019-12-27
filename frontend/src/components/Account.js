@@ -1,8 +1,11 @@
 import React from 'react'
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 const Account = () => {
     return (
-        <h2>Account Page</h2>
+        <Jumbotron>
+            <h2>Your Account</h2>
+        </Jumbotron>
     )
 }
 

@@ -1,8 +1,11 @@
 import React from 'react'
+import Jumbotron from 'react-bootstrap/Jumbotron';
 
 const HomePage = () => {
     return (
-        <h2>Home Page</h2>
+        <Jumbotron>
+            <h2>Home Page</h2>
+        </Jumbotron>
     )
 }
 

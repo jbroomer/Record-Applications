@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react'
 import AppService from '../services/apps'
 import Table from 'react-bootstrap/Table'
+import FaClose from 'react-icons/lib/fa/close'
+import Jumbotron from 'react-bootstrap/Jumbotron'
 
 const ViewAppPage = ({ companies, setCompanies }) => {
     const table = companies.map(company => 
         <>
             <tr>
-                <td><button onClick={() => { handleDeleteChange(company) }}>Delete</button></td>
+                <td><FaClose size={25} color="red" onClick={() => { handleDeleteChange(company) }}>Delete</FaClose></td>
                 <td>{company.id}</td>
                 <td>{company.name}</td>
                 <td>{company.location}</td>
@@ -36,26 +38,28 @@ const ViewAppPage = ({ companies, setCompanies }) => {
     }
 
     return (
-        <div>
-            <h2>View Applications Page</h2>
-            <Table striped bordered hover variant="dark" size="sm">
-                <thead>
-                    <tr>
-                        <th>Delete</th>
-                        <th>#</th>
-                        <th>Company Name</th>
-                        <th>Location</th>
-                        <th>Applied Date</th>
-                        <th>Start Period</th>
-                        <th>URL</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {table}
-                </tbody>
-            </Table>
-        </div>
+        <Jumbotron>
+            <div>
+                <Table striped bordered hover variant="dark" size="sm" responsive>
+                    <thead>
+                        <tr>
+                            <th width="40">Delete</th>
+                            <th width="50">#</th>
+                            <th width="460">Company Name</th>
+                            <th width="150">Location</th>
+                            <th width="150">Applied Date</th>
+                            <th width="200">Start Period</th>
+                            <th width="200">URL</th>
+                            <th width="200">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {table}
+                    </tbody>
+                </Table>
+            </div>
+        </Jumbotron>
+        
     )
 }
 

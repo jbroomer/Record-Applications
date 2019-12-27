@@ -1,8 +1,20 @@
 import React, { useState } from 'react'
 import AppService from '../services/apps'
+import Notification from './Notification'
+import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Form from 'react-bootstrap/Form'
+import Jumbotron from 'react-bootstrap/Jumbotron'
+import Button from 'react-bootstrap/Button'
 
-const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, setNewURL, setNewLocation, newStartPeriod, companies, setCompanies }) => {
+const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, setNewURL, setNewLocation, setStartPeriod, companies, setCompanies }) => {
+    const [message, setMessage] = useState(null);
+
     const addApp = (event) => {
+        if (newName === ('')) {
+            return null;
+        }
+
         let currentDate = new Date();
         event.preventDefault();
         
@@ -14,16 +26,31 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
           period: startPeriod.trim(),
           status: "In Review",
         }
-    
+        if (AppObject.period === '') {
+            AppObject.period = 'Summer 2020??';
+        }
+
         AppService
           .createApp(AppObject)
           .then(data => {
             setCompanies(companies.concat(data));
             setNewName('');
             setNewURL('');
-            newStartPeriod('');
+            setStartPeriod('');
             setNewLocation('');
         })
+        setMessage(`Added ${newName}`)
+        setTimeout(() => {
+        setMessage(null)
+        }, 5000)
+        
+    }
+
+    const resetForm = () => {
+        setNewName('')
+        setNewURL('');
+        setStartPeriod('');
+        setNewLocation('');
     }
 
     const handleNameChange = (event) => {
@@ -39,26 +66,52 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
     }
 
     const handlePeriodChange = (event) => {
-        newStartPeriod(event.target.value);
+        setStartPeriod(event.target.value);
     }
 
     return (
-        <form onSubmit={addApp}>
+        <Jumbotron>
             <div>
-                <h2>Add Applications Page</h2>
-                Company name: <input value={newName} onChange={handleNameChange} />
+                <h2>Add Applications</h2>
                 <br></br>
-                Location: <input value={newLocation} onChange={handleLocationChange} />
-                <br></br>
-                Start Period: <input value={startPeriod} onChange={handlePeriodChange} />
-                <br></br>
-                Application URL: <input value={newURL} onChange={handleURLChange} />
+                <Notification message={message} />
+                <Form.Group>
+                    <Form.Label><strong>Company Name</strong></Form.Label>
+                    <Form.Control value={newName} onChange={handleNameChange}>
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label><strong>Location</strong></Form.Label>
+                    <Form.Control value={newLocation} onChange={handleLocationChange}>
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label><strong>Application URL</strong></Form.Label>
+                    <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                    <InputGroup.Text>
+                        <strong>http://</strong>
+                    </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl value={newURL} onChange={handleURLChange} aria-describedby="basic-addon3" />
+                </InputGroup>
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label><strong>Start Period</strong></Form.Label>
+                    <Form.Control value={startPeriod} onChange={handlePeriodChange} placeholder="Summer 2020">
+                    </Form.Control>
+                </Form.Group>
                 <br></br>
             </div>
             <div>
-                <button type="submit">add</button>
+                <Button onClick={resetForm} variant="outline-danger" size="lg" block>Reset</Button>
             </div>
-        </form>
+            <br></br>
+            <div>
+                <Button onClick={addApp} variant="outline-success" size="lg" block>Submit</Button>
+            </div>
+        </Jumbotron>
+        
     )
 }
 

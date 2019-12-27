@@ -6,6 +6,7 @@ import HomePage from './components/HomePage'
 import Login from './components/Login'
 import Account from './components/Account'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {
   BrowserRouter as Router,
   Route, Link, Redirect, withRouter
@@ -16,7 +17,7 @@ const App = () => {
   const [newName, setNewName] = useState('');
   const [newURL, setNewURL] = useState('');
   const [newLocation, setNewLocation] = useState('');
-  const [startPeriod, newStartPeriod] = useState('');
+  const [startPeriod, setStartPeriod] = useState('');
 
   const myDebugger = () => {
     console.log('this is my debugger');
@@ -28,7 +29,7 @@ const App = () => {
         <div>
           <MyNavbar />
           <Route exact path="/" render={() => <HomePage />} />
-          <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} newStartPeriod={newStartPeriod} companies={companies} setCompanies={setCompanies} />} />
+          <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/account" render={() => <Account />} />

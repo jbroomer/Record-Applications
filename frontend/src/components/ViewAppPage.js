@@ -3,6 +3,7 @@ import AppService from '../services/apps'
 import Table from 'react-bootstrap/Table'
 import FaClose from 'react-icons/lib/fa/close'
 import Jumbotron from 'react-bootstrap/Jumbotron'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 const ViewAppPage = ({ companies, setCompanies }) => {
     const table = companies.map(company => 
@@ -15,7 +16,18 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                 <td>{company.date}</td>
                 <td>{company.period}</td>
                 <td><a href={company.url}>{company.name}</a></td>
-                <td>{company.status}</td>
+                <td>
+                    <Dropdown>
+                        <Dropdown.Toggle variant="secondary">
+                            In Review
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            <Dropdown.Item >Coding Challenge</Dropdown.Item>
+                            <Dropdown.Item >Interview</Dropdown.Item>
+                            <Dropdown.Item >Rejected</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
+                </td>
             </tr>
         </>
     );
@@ -49,8 +61,8 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                             <th width="150">Location</th>
                             <th width="150">Applied Date</th>
                             <th width="200">Start Period</th>
-                            <th width="200">URL</th>
-                            <th width="200">Status</th>
+                            <th width="250">URL</th>
+                            <th width="150">Status</th>
                         </tr>
                     </thead>
                     <tbody>

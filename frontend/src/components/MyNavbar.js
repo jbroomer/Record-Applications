@@ -11,7 +11,8 @@ const MyNavbar = () => {
             <Nav className="mr-auto">
             <Nav.Link href="/add">Add Apps</Nav.Link>
             <Nav.Link href="/view">View Apps</Nav.Link>
-            </Nav>
+            <Nav.Link href="/calendar">Calendar</Nav.Link>
+            </Nav>            
             <NavDropdown title="Account" id="basic-nav-dropdown">
                 <NavDropdown.Item href="/account">Account</NavDropdown.Item>
                 <NavDropdown.Divider />

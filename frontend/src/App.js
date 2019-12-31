@@ -6,7 +6,10 @@ import HomePage from './components/HomePage'
 import Account from './components/Account'
 import Login from './components/Login'
 import Signup from './components/Signup'
+import Calendar from './components/Calendar'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import {
   BrowserRouter as Router,
@@ -32,6 +35,7 @@ const App = () => {
           <Route exact path="/" render={() => <HomePage />} />
           <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
+          <Route exact path="/calendar" render={() => <Calendar />} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/signup" render={() => <Signup />} />
           <Route exact path="/account" render={() => <Account />} />

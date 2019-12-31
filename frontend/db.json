@@ -305,6 +305,24 @@
       "period": "Summer 2020",
       "status": "In Review",
       "id": 34
+    },
+    {
+      "name": "Google",
+      "location": "New York",
+      "url": "http://www.linkedin.com/",
+      "date": "12/27/2019",
+      "period": "Summer 2020",
+      "status": "In Review",
+      "id": 35
+    },
+    {
+      "name": "Hotel",
+      "location": "Rhode Island",
+      "url": "http://www.trivago.com",
+      "date": "12/28/2019",
+      "period": "Summer 2020",
+      "status": "In Review",
+      "id": 36
     }
   ]
 }

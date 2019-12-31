@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppService from '../services/apps'
 import Table from 'react-bootstrap/Table'
 import FaClose from 'react-icons/lib/fa/close'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Dropdown from 'react-bootstrap/Dropdown'
+import FormControl from 'react-bootstrap/FormControl'
+import InputGroup from 'react-bootstrap/InputGroup'
 
 const ViewAppPage = ({ companies, setCompanies }) => {
-    const table = companies.map(company => 
+    const [filterCompanies, setFilterCompanies] = useState('');
+
+    const filteredCompanies = companies.filter(company =>
+        company.name.toLowerCase().includes(filterCompanies.toLowerCase()));
+
+    const table = filteredCompanies.map(company => 
         <>
             <tr>
                 <td><FaClose size={25} color="red" onClick={() => { handleDeleteChange(company) }}>Delete</FaClose></td>
@@ -49,9 +56,19 @@ const ViewAppPage = ({ companies, setCompanies }) => {
         }
     }
 
+    const handleCompanyChange = (event) => {
+        setFilterCompanies(event.target.value);
+    }
+
     return (
         <Jumbotron>
             <div>
+                <InputGroup size="lg" type="text" value={filterCompanies} onChange={handleCompanyChange}> 
+                    <InputGroup.Prepend>
+                    <InputGroup.Text ><strong>Filter</strong></InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl aria-label="Large" aria-describedby="inputGroup-sizing-sm" />
+                </InputGroup>
                 <Table striped bordered hover variant="dark" size="sm" responsive>
                     <thead>
                         <tr>

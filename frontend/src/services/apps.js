@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = 'http://localhost:3001/view';
+const baseURL = 'http://localhost:3001/companies';
 
 const getApp = () => {
     const request = axios.get(baseURL);

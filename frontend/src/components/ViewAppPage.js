@@ -51,7 +51,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
     const handleDeleteChange = (company) => {
         if (window.confirm(`Are you sure you want to remove ${company.name}?`)) {
             AppService
-                .deleteApp(company.id)
+                .deleteApp(Number(company.id))
                 .setCompanies(companies.filter(delCompany => delCompany !== company.id));
         }
     }

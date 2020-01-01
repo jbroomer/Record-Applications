@@ -32,7 +32,7 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
 
         AppService
           .createApp(AppObject)
-          .then(data => {
+          .then(data => { 
             setCompanies(companies.concat(data));
             setNewName('');
             setNewURL('');

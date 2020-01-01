@@ -17,7 +17,7 @@ const HomePage = () => {
     
     return (
         <Jumbotron className={classes.jumbo}>
-            <h1>This is the home Page</h1>
+            <h1>This is the Home Page</h1>
             <h4>Welcome back Guest!</h4>
             <p>Please <Link to="/login">sign in</Link> to add/view your applications.</p>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla aliquet enim tortor at auctor urna. Augue ut lectus arcu bibendum at varius vel pharetra vel. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Penatibus et magnis dis parturient montes nascetur. Mi proin sed libero enim sed faucibus. Adipiscing diam donec adipiscing tristique risus nec feugiat in. Quisque non tellus orci ac auctor augue mauris augue. Amet tellus cras adipiscing enim eu turpis egestas. Sapien pellentesque habitant morbi tristique senectus. Pharetra et ultrices neque ornare. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Maecenas sed enim ut sem. Mi bibendum neque egestas congue.

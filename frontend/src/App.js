@@ -32,7 +32,7 @@ const App = () => {
       <Router>
         <div>
           <MyNavbar />
-          <Route exact path="/" render={() => <HomePage />} />
+          <Route exact path="/" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />} />
           <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
           <Route exact path="/calendar" render={() => <Calendar />} />

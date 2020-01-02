@@ -1,10 +1,12 @@
 const express = require('express');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-
 const app = express();
-app.use(cors());
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+app.use(express.static('build'))
 app.use(bodyParser.json());
+app.use(cors());
+
 
 let companies = [
     {
@@ -26,7 +28,7 @@ let companies = [
         id: 2
     },
     {
-        name: "Amazon",
+        name: "Amazon!",
         location: "New York",
         url: "http://www.amazon.com",
         date: "12/28/2019",
@@ -35,10 +37,6 @@ let companies = [
         id: 3
     },
 ]
-
-app.get('/', (request, response) => {
-    response.send('<h1>This is the home page. Nodemon is working</h1>');
-})
 
 app.get('/companies', (request, response) => {
     response.json(companies);
@@ -89,7 +87,7 @@ app.post('/companies', (request, response) => {
     response.json(company);
 })
 
-const port = 3001;
-app.listen(port, () => {
-    console.log(`Backend server running on port ${port}`);
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+    console.log(`Backend server running on port ${PORT}`);
 })

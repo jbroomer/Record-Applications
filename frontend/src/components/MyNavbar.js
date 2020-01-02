@@ -6,7 +6,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 const MyNavbar = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
-            <Navbar.Brand href="/">Record-Applications</Navbar.Brand>
+            <Navbar.Brand href="/">Record Applications</Navbar.Brand>
             <Navbar.Collapse>
             <Nav className="mr-auto">
             <Nav.Link href="/add">Add Apps</Nav.Link>

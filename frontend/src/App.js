@@ -34,7 +34,7 @@ const App = () => {
           <MyNavbar />
           <Route exact path="/" render={() => <HomePage />} />
           <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
-          <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies}/>} />
+          <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies} key={companies.id}/>} />
           <Route exact path="/calendar" render={() => <Calendar />} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/signup" render={() => <Signup />} />

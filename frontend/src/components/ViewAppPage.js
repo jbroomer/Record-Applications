@@ -34,6 +34,9 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                         </Dropdown.Menu>
                     </Dropdown>
                 </td>
+                <td>
+                    <button>More Info</button>
+                </td>
             </tr>
         </>
     );
@@ -49,10 +52,11 @@ const ViewAppPage = ({ companies, setCompanies }) => {
 
     const handleDeleteChange = (company) => {
         if (window.confirm(`Are you sure you want to remove ${company.name}?`)) {
-            console.log("Delete company");
-            // AppService
-            //     .deleteApp(Number(company.id))
-            //     .setCompanies(companies.filter(delCompany => delCompany !== company.id));
+            AppService
+                .deleteApp(company.id)
+                .then(response => {
+                    setCompanies(companies.filter(delCompany => delCompany.id !== company.id));
+                })
         }
     }
 
@@ -79,6 +83,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                             <th width="200">Start Period</th>
                             <th width="250">URL</th>
                             <th width="150">Status</th>
+                            <th width="100">More Info</th>
                         </tr>
                     </thead>
                     <tbody>

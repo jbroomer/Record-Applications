@@ -25,17 +25,18 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                 <td>
                     <Dropdown>
                         <Dropdown.Toggle variant="secondary">
-                            In Review
+                            {company.status}
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item >Coding Challenge</Dropdown.Item>
-                            <Dropdown.Item >Interview</Dropdown.Item>
-                            <Dropdown.Item >Rejected</Dropdown.Item>
+                            <Dropdown.Item onClick={() => { handleStatusChange(company, "In Review") }}>In Review</Dropdown.Item>
+                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Coding Challenge") }}>Coding Challenge</Dropdown.Item>
+                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Interview") }}>Interview</Dropdown.Item>
+                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Rejected") }}>Rejected</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </td>
                 <td>
-                    <button>More Info</button>
+                    <button >More</button>
                 </td>
             </tr>
         </>
@@ -64,6 +65,23 @@ const ViewAppPage = ({ companies, setCompanies }) => {
         setFilterCompanies(event.target.value);
     }
 
+    const handleStatusChange = (company, newStatus) => {
+        const companyObject = {
+            name: company.name.trim(),
+            location: company.location.trim(),
+            url: 'http://' + company.url.trim(),
+            date: company.date,
+            period: company.period.trim(),
+            status: newStatus,
+        }
+
+        AppService
+            .updateApp(company.id, companyObject)
+            .then(response => {
+                setCompanies(companies.map(currCompany => currCompany.id !== company.id ? currCompany : response))
+            })
+    }
+
     return (
         <Jumbotron>
             <div>
@@ -81,9 +99,9 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                             <th width="150">Location</th>
                             <th width="150">Applied Date</th>
                             <th width="200">Start Period</th>
-                            <th width="250">URL</th>
-                            <th width="150">Status</th>
-                            <th width="100">More Info</th>
+                            <th width="230">URL</th>
+                            <th width="190">Status</th>
+                            <th width="80">More Info</th>
                         </tr>
                     </thead>
                     <tbody>

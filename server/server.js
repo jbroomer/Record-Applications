@@ -74,7 +74,7 @@ app.get('/api/companies', (request, response) => {
     })
 })
 
-app.get('/api/companies/:id', (request, response) => {
+app.get('/api/companies/:id', (request, response, next) => {
     Company.findById(request.params.id)
         .then(company => {
             if (company) {
@@ -87,11 +87,30 @@ app.get('/api/companies/:id', (request, response) => {
         .catch(error => next(error))
 })
 
-app.delete('/api/companies/:id', (request, response) => {
+app.delete('/api/companies/:id', (request, response, next) => {
     Company.findByIdAndRemove(request.params.id).then(result => {
         response.status(204).end();
     })
     .catch(error => next(error))
+})
+
+app.put('/api/companies/:id', (request, response, next) => {
+    const body = request.body
+  
+    const company = {
+        name: body.name,
+        location: body.location,
+        url: body.url,
+        date: body.date,
+        period: body.period,
+        status: body.status,
+    }
+  
+    Company.findByIdAndUpdate(request.params.id, company, { new: true })
+      .then(updatedCompany => {
+        response.json(updatedCompany.toJSON())
+      })
+      .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseURL = '/companies';
+const baseURL = '/api/companies';
 
 const getApp = () => {
     const request = axios.get(baseURL);

@@ -1,12 +1,22 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const path = require('path');
 
-app.use(express.static('build'))
 app.use(bodyParser.json());
+
+const cors = require('cors');
 app.use(cors());
 
+const requestLogger = (request, response, next) => {
+    console.log('Method:', request.method)
+    console.log('Path:  ', request.path)
+    console.log('Body:  ', request.body)
+    console.log('---')
+    next()
+  }
+  
+app.use(requestLogger)
 
 let companies = [
     {
@@ -38,27 +48,34 @@ let companies = [
     },
 ]
 
-app.get('/companies', (request, response) => {
-    response.json(companies);
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
-app.get('/companies/:id', (request, response) => {
-    const id = Number(request.params.id);
-    const company = companies.find(company => company.id === id);
-    
-    if (company) {
-        response.json(company);
-    }
-    else {
-        response.status(404).end();
-    }
+app.get('/add', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
-app.delete('/companies/:id', (request, response) => {
-    const id = Number(request.params.id);
-    companies = companies.filter(company => company.id !== id);
+app.get('/view', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-    response.status(404).end();
+app.get('/calendar', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+app.get('/login', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+app.get('/signup', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+app.get('/account', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
 const generateId = () => {
@@ -68,7 +85,7 @@ const generateId = () => {
     return maxId + 1
 }
 
-app.post('/companies', (request, response) => {
+app.post('/api/companies', (request, response) => {
     const body = request.body;
     let currentDate = new Date();
 
@@ -86,6 +103,35 @@ app.post('/companies', (request, response) => {
 
     response.json(company);
 })
+
+app.get('/api/companies', (request, response) => {
+    response.json(companies);
+})
+
+app.get('/api/companies/:id', (request, response) => {
+    const id = Number(request.params.id);
+    const company = companies.find(company => company.id === id);
+    
+    if (company) {
+        response.json(company);
+    }
+    else {
+        response.status(404).end();
+    }
+})
+
+app.delete('/api/companies/:id', (request, response) => {
+    const id = Number(request.params.id);
+    companies = companies.filter(company => company.id !== id);
+
+    response.status(404).end();
+})
+
+const unknownEndpoint = (request, response) => {
+    response.status(404).send({ error: 'unknown endpoint' })
+  }
+  
+app.use(unknownEndpoint)
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -17,7 +17,6 @@ const ViewAppPage = ({ companies, setCompanies }) => {
         <>
             <tr>
                 <td><FaClose size={25} color="red" onClick={() => { handleDeleteChange(company) }}>Delete</FaClose></td>
-                <td>{company.id}</td>
                 <td>{company.name}</td>
                 <td>{company.location}</td>
                 <td>{company.date}</td>
@@ -50,9 +49,10 @@ const ViewAppPage = ({ companies, setCompanies }) => {
 
     const handleDeleteChange = (company) => {
         if (window.confirm(`Are you sure you want to remove ${company.name}?`)) {
-            AppService
-                .deleteApp(Number(company.id))
-                .setCompanies(companies.filter(delCompany => delCompany !== company.id));
+            console.log("Delete company");
+            // AppService
+            //     .deleteApp(Number(company.id))
+            //     .setCompanies(companies.filter(delCompany => delCompany !== company.id));
         }
     }
 
@@ -73,7 +73,6 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                     <thead>
                         <tr>
                             <th width="40">Delete</th>
-                            <th width="50">#</th>
                             <th width="460">Company Name</th>
                             <th width="150">Location</th>
                             <th width="150">Applied Date</th>

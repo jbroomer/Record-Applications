@@ -1,7 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const path = require('path');
+const Company = require('./models/company')
 
 app.use(bodyParser.json());
 
@@ -17,36 +19,6 @@ const requestLogger = (request, response, next) => {
   }
   
 app.use(requestLogger)
-
-let companies = [
-    {
-        name: "Google",
-        location: "New York",
-        url: "http://www.google.com",
-        date: "12/26/2019",
-        period: "Summer 2020",
-        status: "In Review",
-        id: 1
-    },
-    {
-        name: "Facebook",
-        location: "New York",
-        url: "http://www.facebook.com",
-        date: "12/27/2019",
-        period: "Summer 2020",
-        status: "In Review",
-        id: 2
-    },
-    {
-        name: "Amazon!",
-        location: "New York",
-        url: "http://www.amazon.com",
-        date: "12/28/2019",
-        period: "Summer 2020",
-        status: "In Review",
-        id: 3
-    },
-]
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -78,53 +50,48 @@ app.get('/account', (request, response) => {
     response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
-const generateId = () => {
-    const maxId = companies.length > 0
-      ? Math.max(...companies.map(n => n.id))
-      : 0
-    return maxId + 1
-}
-
 app.post('/api/companies', (request, response) => {
     const body = request.body;
     let currentDate = new Date();
 
-    const company = {
+    const company = new Company({
         name: body.name.trim(),
         location: body.location.trim(),
         url: body.url,
         date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
         period: body.period.trim(),
         status: "In Review",
-        id: generateId(),
-    }
+    })
 
-    companies = companies.concat(company);
-
-    response.json(company);
+    company.save().then(savedCompanies => {
+        response.json(savedCompanies.toJSON());
+    })
 })
 
 app.get('/api/companies', (request, response) => {
-    response.json(companies);
+    Company.find({}).then(companies => {
+        response.json(companies.map(company => company.toJSON()));
+    })
 })
 
 app.get('/api/companies/:id', (request, response) => {
-    const id = Number(request.params.id);
-    const company = companies.find(company => company.id === id);
-    
-    if (company) {
-        response.json(company);
-    }
-    else {
-        response.status(404).end();
-    }
+    Company.findById(request.params.id)
+        .then(company => {
+            if (company) {
+                response.json(company.toJSON());
+            }
+            else {
+                response.status(404).end();
+            }
+        })
+        .catch(error => next(error))
 })
 
 app.delete('/api/companies/:id', (request, response) => {
-    const id = Number(request.params.id);
-    companies = companies.filter(company => company.id !== id);
-
-    response.status(404).end();
+    Company.findByIdAndRemove(request.params.id).then(result => {
+        response.status(204).end();
+    })
+    .catch(error => next(error))
 })
 
 const unknownEndpoint = (request, response) => {
@@ -133,7 +100,22 @@ const unknownEndpoint = (request, response) => {
   
 app.use(unknownEndpoint)
 
-const PORT = process.env.PORT || 3001;
+const errorHandler = (error, request, response, next) => {
+    console.error(error.message)
+  
+    if (error.name === 'CastError' && error.kind === 'ObjectId') {
+      return response.status(400).send({ error: 'malformatted id' })
+    } 
+    else if (error.name === 'ValidationError') {
+        return response.status(400).json({ error: error.message })
+    }
+
+    next(error)
+}
+  
+app.use(errorHandler)
+
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Backend server running on port ${PORT}`);
 })

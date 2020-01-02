@@ -27,7 +27,7 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
           status: "In Review",
         }
         if (AppObject.period === '') {
-            AppObject.period = 'Summer 2020?';
+            AppObject.period = 'Summer 2020';
         }
 
         AppService

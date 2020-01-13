@@ -25,6 +25,7 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
           date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
           period: startPeriod.trim(),
           status: "In Review",
+          note: "",
         }
         if (AppObject.period === '') {
             AppObject.period = 'Summer 2020';

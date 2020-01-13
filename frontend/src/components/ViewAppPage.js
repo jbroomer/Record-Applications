@@ -6,6 +6,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Dropdown from 'react-bootstrap/Dropdown'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
+import Note from './Note'
 
 const ViewAppPage = ({ companies, setCompanies }) => {
     const [filterCompanies, setFilterCompanies] = useState('');
@@ -36,7 +37,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                     </Dropdown>
                 </td>
                 <td>
-                    <button >More</button>
+                    <Note company={company} companies={companies} setCompanies={setCompanies} />
                 </td>
             </tr>
         </>
@@ -73,6 +74,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
             date: company.date,
             period: company.period.trim(),
             status: newStatus,
+            note: company.note,
         }
 
         AppService
@@ -99,7 +101,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                             <th width="150">Location</th>
                             <th width="150">Applied Date</th>
                             <th width="200">Start Period</th>
-                            <th width="230">URL</th>
+                            <th width="230">Application URL</th>
                             <th width="190">Status</th>
                             <th width="80">More Info</th>
                         </tr>

@@ -21,6 +21,7 @@ const companySchema = new mongoose.Schema({
     date: String,
     period: String,
     status: String,
+    note: String,
 })
 companySchema.set('toJSON', {
     transform: (document, returnedObject) => {

@@ -61,6 +61,7 @@ app.post('/api/companies', (request, response) => {
         date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
         period: body.period.trim(),
         status: "In Review",
+        note: "",
     })
 
     company.save().then(savedCompanies => {
@@ -104,6 +105,7 @@ app.put('/api/companies/:id', (request, response, next) => {
         date: body.date,
         period: body.period,
         status: body.status,
+        note: body.note,
     }
   
     Company.findByIdAndUpdate(request.params.id, company, { new: true })

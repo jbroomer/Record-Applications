@@ -7,6 +7,7 @@ import Account from './components/Account'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Calendar from './components/Calendar'
+import Statistics from './components/Statistics'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,6 +37,7 @@ const App = () => {
           <Route exact path="/add" render={() => <AddAppPage newName={newName} newURL={newURL} newLocation={newLocation} startPeriod={startPeriod} setNewName={setNewName} setNewURL={setNewURL} setNewLocation={setNewLocation} setStartPeriod={setStartPeriod} companies={companies} setCompanies={setCompanies} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies} key={companies.id}/>} />
           <Route exact path="/calendar" render={() => <Calendar />} />
+          <Route exact path="/statistics" render={() => <Statistics />} />
           <Route exact path="/login" render={() => <Login />} />
           <Route exact path="/signup" render={() => <Signup />} />
           <Route exact path="/account" render={() => <Account />} />

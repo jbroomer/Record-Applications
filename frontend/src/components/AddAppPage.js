@@ -7,8 +7,12 @@ import Form from 'react-bootstrap/Form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 
-const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, setNewURL, setNewLocation, setStartPeriod, companies, setCompanies }) => {
+const AddAppPage = ({ companies, setCompanies }) => {
     const [message, setMessage] = useState(null);
+    const [newName, setNewName] = useState('');
+    const [newURL, setNewURL] = useState('');
+    const [newLocation, setNewLocation] = useState('');
+    const [startPeriod, setStartPeriod] = useState('');
 
     const addApp = (event) => {
         if (newName === ('')) {
@@ -17,7 +21,7 @@ const AddAppPage = ({ newName, newURL, newLocation, startPeriod, setNewName, set
 
         let currentDate = new Date();
         event.preventDefault();
-        
+
         const AppObject = {
           name: newName.trim(),
           location: newLocation.trim(),

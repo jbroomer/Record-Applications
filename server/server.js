@@ -38,6 +38,10 @@ app.get('/calendar', (request, response) => {
     response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })
 
+app.get('/statistics', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
 app.get('/login', (request, response) => {
     response.sendFile(path.join(__dirname, 'build', 'index.html'));
 })

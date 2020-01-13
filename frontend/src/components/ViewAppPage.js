@@ -3,10 +3,11 @@ import AppService from '../services/apps'
 import Table from 'react-bootstrap/Table'
 import FaClose from 'react-icons/lib/fa/close'
 import Jumbotron from 'react-bootstrap/Jumbotron'
-import Dropdown from 'react-bootstrap/Dropdown'
 import FormControl from 'react-bootstrap/FormControl'
 import InputGroup from 'react-bootstrap/InputGroup'
 import Note from './Note'
+import URL from './URL'
+import Status from './Status'
 
 const ViewAppPage = ({ companies, setCompanies }) => {
     const [filterCompanies, setFilterCompanies] = useState('');
@@ -22,23 +23,9 @@ const ViewAppPage = ({ companies, setCompanies }) => {
                 <td>{company.location}</td>
                 <td>{company.date}</td>
                 <td>{company.period}</td>
-                <td><a href={company.url}>{company.name}</a></td>
-                <td>
-                    <Dropdown>
-                        <Dropdown.Toggle variant="secondary">
-                            {company.status}
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            <Dropdown.Item onClick={() => { handleStatusChange(company, "In Review") }}>In Review</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Coding Challenge") }}>Coding Challenge</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Interview") }}>Interview</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { handleStatusChange(company, "Rejected") }}>Rejected</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </td>
-                <td>
-                    <Note company={company} companies={companies} setCompanies={setCompanies} />
-                </td>
+                <td><URL company={company} /></td>
+                <td><Status company={company} companies={companies} setCompanies={setCompanies}/></td>
+                <td><Note company={company} companies={companies} setCompanies={setCompanies} /></td>
             </tr>
         </>
     );
@@ -70,7 +57,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
         const companyObject = {
             name: company.name.trim(),
             location: company.location.trim(),
-            url: 'http://' + company.url.trim(),
+            url: company.url.trim(),
             date: company.date,
             period: company.period.trim(),
             status: newStatus,

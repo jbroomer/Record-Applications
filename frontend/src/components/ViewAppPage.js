@@ -13,7 +13,11 @@ const ViewAppPage = ({ companies, setCompanies }) => {
     const [filterCompanies, setFilterCompanies] = useState('');
 
     const filteredCompanies = companies.filter(company =>
-        company.name.toLowerCase().includes(filterCompanies.toLowerCase()));
+               company.name.toLowerCase().includes(filterCompanies.toLowerCase()) 
+            || company.period.toLowerCase().includes(filterCompanies.toLowerCase())
+            || company.location.toLowerCase().includes(filterCompanies.toLowerCase())
+            || company.status.toLowerCase().includes(filterCompanies.toLowerCase())
+    );
 
     const table = filteredCompanies.map(company => 
         <>

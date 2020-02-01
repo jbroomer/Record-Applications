@@ -49,7 +49,7 @@ const Note = ({ company, companies, setCompanies }) => {
                 <Modal.Header closeButton>
                 <Modal.Title>Notes</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><strong>Add Notes to company</strong><FormControl as="textarea" rows="10" defaultValue={note} onChange={handleModalChange}/></Modal.Body>
+                <Modal.Body><strong>Add Notes to {company.name}</strong><FormControl as="textarea" rows="10" defaultValue={note} onChange={handleModalChange}/></Modal.Body>
                 <Modal.Footer>
                 <Button variant="secondary" onClick={handleCloseModal}>
                     Close

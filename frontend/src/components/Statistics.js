@@ -4,7 +4,7 @@ const Statistics = () => {
     return (
         <div>
             <h1>This is the Statistics page</h1>
-            test
+            test!
         </div>
     )
 }

@@ -7,11 +7,11 @@ App-Tracker is a personal web app I developed to help me organize, update, and k
 
 * Add applications 
 * View applications
+* Edit applications (Status, side-notes)
 
 
 # What are the upcoming features?
 
-* User Authentication
 * Sync with Google Calendars
 * Statistics Page
 

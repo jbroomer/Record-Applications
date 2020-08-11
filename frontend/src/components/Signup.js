@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import AppService from '../services/apps'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +12,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Notification from './Notification'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -32,13 +34,57 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const Signup = () => {
+const Signup = ({ user, setUser }) => {
     const classes = useStyles();
+
+    const [message, setMessage] = useState('');
+    const [newUsername, setNewUsername] = useState('');
+    const [newName, setNewName] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    //const [user, setUser] = useState(null);
+
+    const register = (event) => {
+        event.preventDefault();
+        try {
+            const userObject = {
+            username: newUsername,
+            name: newName,
+            password: newPassword,
+        }
+
+        const user = AppService.createUser(userObject);
+        setUser(user);
+        console.log(`${user} has been registered`);
+        setNewUsername('');
+        setNewName('');
+        setNewPassword('');
+        } catch(exception) {
+            setMessage('Invalid')
+            setTimeout(() => {
+                setMessage(null)
+            }, 5000)
+        }
+        
+            
+    }
+
+    const handleUsernameChange = (event) => {
+        setNewUsername(event.target.value);
+    }
+
+    const handleNameChange = (event) => {
+        setNewName(event.target.value);
+    }
+
+    const handlePasswordChange = (event) => {
+        setNewPassword(event.target.value);
+    }
 
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+            <Notification message={message} />
                 <Avatar className={classes.avatar}>
                 </Avatar>
                 <Typography component="h1" variant="h5">
@@ -46,27 +92,16 @@ const Signup = () => {
                 </Typography>
                 <form className={classes.form} action="/login" noValidate>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                     <TextField
-                        autoComplete="fname"
-                        name="firstName"
+                        name="username"
                         variant="outlined"
                         required
                         fullWidth
-                        id="firstName"
-                        label="First Name"
+                        id="username"
+                        label="Username"
                         autoFocus
-                    />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                    <TextField
-                        variant="outlined"
-                        required
-                        fullWidth
-                        id="lastName"
-                        label="Last Name"
-                        name="lastName"
-                        autoComplete="lname"
+                        onChange={handleUsernameChange}
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -74,10 +109,10 @@ const Signup = () => {
                         variant="outlined"
                         required
                         fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        autoComplete="email"
+                        id="name"
+                        label="Full name"
+                        name="name"
+                        onChange={handleNameChange}
                     />
                     </Grid>
                     <Grid item xs={12}>
@@ -89,7 +124,7 @@ const Signup = () => {
                         label="Password"
                         type="password"
                         id="password"
-                        autoComplete="current-password"
+                        onChange={handlePasswordChange}
                     />
                     </Grid>
                 </Grid>
@@ -99,6 +134,7 @@ const Signup = () => {
                     variant="contained"
                     color="primary"
                     className={classes.submit}
+                    onClick={register}
                 >
                     Sign Up
                 </Button>

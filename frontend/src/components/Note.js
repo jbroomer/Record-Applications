@@ -31,6 +31,7 @@ const Note = ({ company, companies, setCompanies }) => {
             period: company.period.trim(),
             status: company.status,
             note: note,
+            user: company.user.username
         }
 
         AppService

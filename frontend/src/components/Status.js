@@ -3,6 +3,7 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import AppService from '../services/apps'
 
 const Status = ({ company, companies, setCompanies }) => {
+    
     const handleStatusChange = (company, newStatus) => {
         const companyObject = {
             name: company.name.trim(),
@@ -12,6 +13,7 @@ const Status = ({ company, companies, setCompanies }) => {
             period: company.period.trim(),
             status: newStatus,
             note: company.note,
+            user: company.user.username
         }
 
         AppService

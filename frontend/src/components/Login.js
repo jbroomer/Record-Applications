@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -11,6 +11,9 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import LoginService from '../services/login'
+import Notification from './Notification'
+import AppService from '../services/apps'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -32,19 +35,46 @@ const useStyles = makeStyles(theme => ({
     },
   }));
 
-const Login = (props) => {
+const Login = ({ user, setUser }) => {
     const classes = useStyles();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    //const [user, setUser] = useState(null);
 
-    return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
-            <div className={classes.paper}>
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        try {
+            const user = await LoginService.login({ username, password });
+            
+            window.localStorage.setItem(
+                'loggedCompanyappUser', JSON.stringify(user)
+              ) 
+            AppService.setToken(user.token);
+            setUser(user);
+            console.log("username: " + user.username);
+            console.log("user name: " + user.name);
+            console.log("user password: " + user.password);
+            console.log("user id: " + user.id);
+            setUsername('');
+            setPassword('');
+        } catch (exception) {
+            setErrorMessage('Wrong credentials')
+            setTimeout(() => {
+                setErrorMessage(null)
+            }, 5000)
+        }
+    }
+
+    const loginForm = () => (
+        <div className={classes.paper}>
+                <Notification message={errorMessage}/>
                 <Avatar className={classes.avatar}>
                 </Avatar>
                 <Typography component="h1" variant="h5">
                 Sign in
                 </Typography>
-                <form className={classes.form} action="/" noValidate>
+                <form className={classes.form} action="/" noValidate onSubmit={handleLogin}>
                 <TextField
                     variant="outlined"
                     margin="normal"
@@ -54,6 +84,7 @@ const Login = (props) => {
                     label="Username"
                     name="username"
                     autoFocus
+                    onChange = {({ target }) => setUsername(target.value)}
                 />
                 <TextField
                     variant="outlined"
@@ -65,6 +96,7 @@ const Login = (props) => {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    onChange = {({ target }) => setPassword(target.value)}
                 />
                 <FormControlLabel
                     control={<Checkbox value="remember" color="primary" />}
@@ -93,6 +125,18 @@ const Login = (props) => {
                 </Grid>
                 </form>
             </div>
+    )
+
+    const loggedInForm = () => (
+        <div>
+            Go add/view your applications
+        </div>
+    )
+
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            {loginForm()}
         </Container>
     )
 }

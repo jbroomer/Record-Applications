@@ -9,14 +9,25 @@ import Note from './Note'
 import URL from './URL'
 import Status from './Status'
 
-const ViewAppPage = ({ companies, setCompanies }) => {
+const ViewAppPage = ({ companies, setCompanies, user, setUser }) => {
     const [filterCompanies, setFilterCompanies] = useState('');
 
+    useEffect(() => {
+        const loggedUserJSON = window.localStorage.getItem('loggedCompanyappUser')
+        if (loggedUserJSON) {
+            const user = JSON.parse(loggedUserJSON)
+            setUser(user)
+            AppService.setToken(user.token)
+        }
+        }, [])
+
     const filteredCompanies = companies.filter(company =>
-               company.name.toLowerCase().includes(filterCompanies.toLowerCase()) 
+               (company.name.toLowerCase().includes(filterCompanies.toLowerCase()) 
             || company.period.toLowerCase().includes(filterCompanies.toLowerCase())
             || company.location.toLowerCase().includes(filterCompanies.toLowerCase())
-            || company.status.toLowerCase().includes(filterCompanies.toLowerCase())
+            || company.status.toLowerCase().includes(filterCompanies.toLowerCase()))
+            && company.user.username == user.username
+            
     );
 
     const table = filteredCompanies.map(company => 
@@ -66,6 +77,7 @@ const ViewAppPage = ({ companies, setCompanies }) => {
             period: company.period.trim(),
             status: newStatus,
             note: company.note,
+            user: company.user.username
         }
 
         AppService

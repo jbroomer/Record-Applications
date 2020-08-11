@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import AppService from '../services/apps'
 import Notification from './Notification'
 import FormControl from 'react-bootstrap/FormControl'
@@ -7,12 +7,21 @@ import Form from 'react-bootstrap/Form'
 import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 
-const AddAppPage = ({ companies, setCompanies }) => {
+const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
     const [message, setMessage] = useState(null);
     const [newName, setNewName] = useState('');
     const [newURL, setNewURL] = useState('');
     const [newLocation, setNewLocation] = useState('');
     const [startPeriod, setStartPeriod] = useState('');
+    
+    useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedCompanyappUser')
+    if (loggedUserJSON) {
+        const user = JSON.parse(loggedUserJSON)
+        setUser(user)
+        AppService.setToken(user.token)
+    }
+    }, [])
 
     const addApp = (event) => {
         if (newName === ('')) {
@@ -30,9 +39,11 @@ const AddAppPage = ({ companies, setCompanies }) => {
           period: startPeriod.trim(),
           status: "In Review",
           note: "",
+          user: user.username
+
         }
         if (AppObject.period === '') {
-            AppObject.period = 'Summer 2020';
+            AppObject.period = 'Summer 2021';
         }
 
         AppService

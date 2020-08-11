@@ -28,37 +28,41 @@ app.use(requestLogger)
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-// app.get('/', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+// =================================================
+// Heroku Routes
+// =================================================
 
-// app.get('/add', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/view', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/add', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/calendar', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/view', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/statistics', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/calendar', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/login', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/statistics', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/signup', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/login', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
-// app.get('/account', (request, response) => {
-//     response.sendFile(path.join(__dirname, 'build', 'index.html'));
-// })
+app.get('/signup', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
+
+app.get('/account', (request, response) => {
+    response.sendFile(path.join(__dirname, 'build', 'index.html'));
+})
 
 // =================================================
 // Companies

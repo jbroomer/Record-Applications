@@ -4,6 +4,10 @@ import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 const MyNavbar = () => {
+    const logout = () => {
+        window.localStorage.clear();
+    }
+
     return (
         <Navbar bg="dark" variant="dark" expand="lg">
             <Navbar.Brand href="/">Record Applications</Navbar.Brand>
@@ -18,7 +22,7 @@ const MyNavbar = () => {
                 <NavDropdown.Item href="/account">Account</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                <NavDropdown.Item href="/" onClick={() => logout()}>Logout</NavDropdown.Item>
             </NavDropdown>
         </Navbar.Collapse>
         </Navbar>

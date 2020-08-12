@@ -46,17 +46,34 @@ const HomePage = () => {
 
     return (
         <Jumbotron className={classes.jumbo}>
-            <h1>This is the Home Page</h1>
+            <h1>Home Page</h1>
             
             {loggedIn() === true ?
                 loggedInHomePage() :
                 loggedOutHomePage()}
+            
+            <div>
+                <h2>What is App-Tracker?</h2>
+                <p>App-Tracker is a web app developed to help organize, update, and keep track of job applications all on the same site.</p>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nulla aliquet enim tortor at auctor urna. Augue ut lectus arcu bibendum at varius vel pharetra vel. Rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar pellentesque habitant. Penatibus et magnis dis parturient montes nascetur. Mi proin sed libero enim sed faucibus. Adipiscing diam donec adipiscing tristique risus nec feugiat in. Quisque non tellus orci ac auctor augue mauris augue. Amet tellus cras adipiscing enim eu turpis egestas. Sapien pellentesque habitant morbi tristique senectus. Pharetra et ultrices neque ornare. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Maecenas sed enim ut sem. Mi bibendum neque egestas congue.
-                Faucibus a pellentesque sit amet porttitor eget dolor morbi. Non pulvinar neque laoreet suspendisse interdum consectetur libero id faucibus. Sit amet justo donec enim diam vulputate ut. Vestibulum morbi blandit cursus risus at. Vitae auctor eu augue ut lectus. Praesent tristique magna sit amet. Sodales ut eu sem integer vitae justo eget. Elementum curabitur vitae nunc sed. Nam at lectus urna duis convallis. Nulla posuere sollicitudin aliquam ultrices sagittis. Gravida neque convallis a cras semper auctor neque. Malesuada nunc vel risus commodo viverra. Enim praesent elementum facilisis leo vel fringilla. Nisi porta lorem mollis aliquam ut. Orci nulla pellentesque dignissim enim sit amet.
-                Quis ipsum suspendisse ultrices gravida dictum fusce. Mi sit amet mauris commodo quis imperdiet massa. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Odio euismod lacinia at quis. Consequat semper viverra nam libero justo laoreet. Sed viverra tellus in hac. Nunc congue nisi vitae suscipit tellus mauris a diam. Sit amet purus gravida quis. Elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Praesent semper feugiat nibh sed. Quam vulputate dignissim suspendisse in. Ridiculus mus mauris vitae ultricies leo integer malesuada. Facilisis volutpat est velit egestas dui id ornare. Sit amet tellus cras adipiscing enim eu turpis egestas.
-                Massa ultricies mi quis hendrerit. Duis at tellus at urna condimentum mattis. Arcu non sodales neque sodales. Integer vitae justo eget magna. Sagittis id consectetur purus ut faucibus. Egestas congue quisque egestas diam. Vulputate eu scelerisque felis imperdiet proin. Eu facilisis sed odio morbi quis commodo odio. Ut etiam sit amet nisl purus in mollis nunc sed. Justo nec ultrices dui sapien. Phasellus faucibus scelerisque eleifend donec pretium vulputate. Neque convallis a cras semper auctor. Commodo ullamcorper a lacus vestibulum sed arcu.
-            </p>
+                <h2>What are the current features?</h2>
+                <ul>
+                    <l1>Add Applications</l1>
+                    <br></br>
+                    <l1>View Applications</l1>
+                    <br></br>
+                    <l1>Edit Applications (Status, side-notes)</l1>
+                </ul>
+
+                <h2>What are some upcoming features?</h2>
+                <ul>
+                    <l1>Sync with google calendars (e.g Interview dates)</l1>
+                    <br></br>
+                    <l1>Statistics of Applications Page</l1>
+                </ul>
+            </div>
+            
+
         </Jumbotron>
     )
 }

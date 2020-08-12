@@ -34,7 +34,7 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
         const AppObject = {
           name: newName.trim(),
           location: newLocation.trim(),
-          url: 'http://' + newURL,
+          url: newURL.trim(),
           date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
           period: startPeriod.trim(),
           status: "In Review",
@@ -44,6 +44,10 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
         }
         if (AppObject.period === '') {
             AppObject.period = 'Summer 2021';
+        }
+
+        if (newURL !== '') {
+            AppObject.url = 'http://' + newURL;
         }
 
         AppService

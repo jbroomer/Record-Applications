@@ -15,8 +15,8 @@ const URL = ({ company }) => {
     return (
         <div>
             {company.url === '' ?
-            emptyURL()
-            : nonEmptyURL()}
+            emptyURL() :
+            nonEmptyURL()}
         </div>
     )
 }

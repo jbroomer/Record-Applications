@@ -58,11 +58,12 @@ const Signup = ({ user, setUser }) => {
         setNewUsername('');
         setNewName('');
         setNewPassword('');
+        window.location.href="/login"; 
         } catch(exception) {
-            setMessage('Invalid')
+            setMessage('Username taken')
             setTimeout(() => {
-                setMessage(null)
-            }, 5000)
+                setMessage('')
+            }, 3000)
         }
         
             

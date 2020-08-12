@@ -40,7 +40,6 @@ const Login = ({ user, setUser }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    //const [user, setUser] = useState(null);
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -58,11 +57,12 @@ const Login = ({ user, setUser }) => {
             console.log("user id: " + user.id);
             setUsername('');
             setPassword('');
+            window.location.href="/"; 
         } catch (exception) {
             setErrorMessage('Wrong credentials')
             setTimeout(() => {
-                setErrorMessage(null)
-            }, 5000)
+                setErrorMessage('')
+            }, 3000)
         }
     }
 

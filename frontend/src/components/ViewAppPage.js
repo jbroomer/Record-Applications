@@ -22,7 +22,8 @@ const ViewAppPage = ({ companies, setCompanies, user, setUser }) => {
         }, [])
 
     const filteredCompanies = companies.filter(company =>
-               (company.name.toLowerCase().includes(filterCompanies.toLowerCase()) 
+               (company.title.toLowerCase().includes(filterCompanies.toLowerCase())
+            || company.name.toLowerCase().includes(filterCompanies.toLowerCase()) 
             || company.period.toLowerCase().includes(filterCompanies.toLowerCase())
             || company.location.toLowerCase().includes(filterCompanies.toLowerCase())
             || company.status.toLowerCase().includes(filterCompanies.toLowerCase()))
@@ -34,6 +35,7 @@ const ViewAppPage = ({ companies, setCompanies, user, setUser }) => {
         <>
             <tr>
                 <td><FaClose size={25} color="red" onClick={() => { handleDeleteChange(company) }}>Delete</FaClose></td>
+                <td>{company.title}</td>
                 <td>{company.name}</td>
                 <td>{company.location}</td>
                 <td>{company.date}</td>
@@ -70,6 +72,7 @@ const ViewAppPage = ({ companies, setCompanies, user, setUser }) => {
 
     const handleStatusChange = (company, newStatus) => {
         const companyObject = {
+            title: company.title.trim(),
             name: company.name.trim(),
             location: company.location.trim(),
             url: company.url.trim(),
@@ -100,6 +103,7 @@ const ViewAppPage = ({ companies, setCompanies, user, setUser }) => {
                     <thead>
                         <tr>
                             <th width="40">Delete</th>
+                            <th width='300'>Job Title</th>
                             <th width="460">Company Name</th>
                             <th width="150">Location</th>
                             <th width="150">Applied Date</th>

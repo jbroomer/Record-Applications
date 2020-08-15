@@ -12,6 +12,7 @@ const url = `mongodb+srv://jackc099:${password}@record-apps-3jqzj.mongodb.net/te
 mongoose.connect(url, { useNewUrlParser: true })
 
 const companySchema = new mongoose.Schema({
+    title: String,
     name: String,
     location: String,
     url: String,
@@ -23,6 +24,7 @@ const companySchema = new mongoose.Schema({
 const Company = mongoose.model('Company', companySchema)
 
 const company = new Company({
+    title: "Software Engineer",
     name: "Google",
     location: "New York",
     url: "www.google.com",

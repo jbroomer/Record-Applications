@@ -6,6 +6,7 @@ const Status = ({ company, companies, setCompanies }) => {
     
     const handleStatusChange = (company, newStatus) => {
         const companyObject = {
+            title: company.title.trim(),
             name: company.name.trim(),
             location: company.location.trim(),
             url: company.url.trim(),

@@ -30,7 +30,7 @@ const App = () => {
           <Route exact path="/add" render={() => <AddAppPage companies={companies} setCompanies={setCompanies} user={user} setUser={setUser} />} />
           <Route exact path="/view" render={() => <ViewAppPage companies={companies} setCompanies={setCompanies} key={companies.id} user={user} setUser={setUser} />} />
           <Route exact path="/calendar" render={() => <Calendar />} />
-          <Route exact path="/statistics" render={() => <Statistics />} />
+          <Route exact path="/statistics" render={() => <Statistics companies={companies} setCompanies={setCompanies} user={user} setUser={setUser} />} />
           <Route exact path="/login" render={() => <Login user={user} setUser={setUser} />} />
           <Route exact path="/signup" render={() => <Signup user={user} setUser={setUser} />} />
           <Route exact path="/account" render={() => <Account />} />

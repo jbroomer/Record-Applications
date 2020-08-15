@@ -24,6 +24,7 @@ const Note = ({ company, companies, setCompanies }) => {
 
     const handleSaveNotes = (company) => {
         const companyObject = {
+            title: company.title.trim(),
             name: company.name.trim(),
             location: company.location.trim(),
             url: company.url.trim(),

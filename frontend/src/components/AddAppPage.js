@@ -8,11 +8,12 @@ import Jumbotron from 'react-bootstrap/Jumbotron'
 import Button from 'react-bootstrap/Button'
 
 const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
-    const [message, setMessage] = useState(null);
+    const [message, setMessage] = useState('');
     const [newName, setNewName] = useState('');
     const [newURL, setNewURL] = useState('');
     const [newLocation, setNewLocation] = useState('');
     const [startPeriod, setStartPeriod] = useState('');
+    const [newTitle, setNewTitle] = useState('');
     
     useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedCompanyappUser')
@@ -32,21 +33,30 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
         event.preventDefault();
 
         const AppObject = {
-          name: newName.trim(),
-          location: newLocation.trim(),
-          url: newURL.trim(),
-          date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
-          period: startPeriod.trim(),
-          status: "In Review",
-          note: "",
-          user: user.username
-
+            title: newTitle.trim(),
+            name: newName.trim(),
+            location: newLocation.trim(),
+            url: newURL.trim(),
+            date: new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit'}).format(currentDate),
+            period: startPeriod.trim(),
+            status: "In Review",
+            note: "",
+            user: user.username
         }
         if (AppObject.period === '') {
             AppObject.period = 'Summer 2021';
         }
 
-        if (newURL !== '') {
+        if (AppObject.title === '') {
+            AppObject.title = 'Software Engineer';
+        }
+
+        // Input URL is a http/https URL
+        if (newURL.toLowerCase().substring(0, 4) == 'http') {
+            AppObject.url = newURL;
+        }
+        // Input URL starts with www.
+        else if (newURL !== '') {
             AppObject.url = 'http://' + newURL;
         }
 
@@ -54,6 +64,7 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
           .createApp(AppObject)
           .then(data => { 
             setCompanies(companies.concat(data));
+            setNewTitle('');
             setNewName('');
             setNewURL('');
             setStartPeriod('');
@@ -61,16 +72,21 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
         })
         setMessage(`Added ${newName}`)
         setTimeout(() => {
-        setMessage(null)
+        setMessage('')
         }, 5000)
         
     }
 
     const resetForm = () => {
+        setNewTitle('');
         setNewName('')
         setNewURL('');
         setStartPeriod('');
         setNewLocation('');
+    }
+
+    const handleTitleChange = (event) => {
+        setNewTitle(event.target.value);
     }
 
     const handleNameChange = (event) => {
@@ -96,6 +112,11 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
                 <br></br>
                 <Notification message={message} />
                 <Form.Group>
+                    <Form.Label><strong>Job Title</strong></Form.Label>
+                    <Form.Control value={newTitle} onChange={handleTitleChange} placeholder="Software Engineer">
+                    </Form.Control>
+                </Form.Group>
+                <Form.Group>
                     <Form.Label><strong>Company Name</strong></Form.Label>
                     <Form.Control value={newName} onChange={handleNameChange}>
                     </Form.Control>
@@ -110,10 +131,10 @@ const AddAppPage = ({ companies, setCompanies, user, setUser }) => {
                     <InputGroup className="mb-3">
                     <InputGroup.Prepend>
                     <InputGroup.Text>
-                        <strong>http://</strong>
+                        <strong>Https://</strong>
                     </InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl value={newURL} onChange={handleURLChange} aria-describedby="basic-addon3" />
+                    <FormControl value={newURL} onChange={handleURLChange} aria-describedby="basic-addon3"/>
                 </InputGroup>
                 </Form.Group>
                 <Form.Group>

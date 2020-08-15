@@ -25,6 +25,7 @@ companiesRouter.post('/', async (request, response) => {
     const user = await User.findById(decodedToken.id)
 
     const company = new Company({
+        title: body.title.trim(),
         name: body.name.trim(),
         location: body.location.trim(),
         url: body.url,
@@ -72,6 +73,7 @@ companiesRouter.put('/:id', (request, response, next) => {
     const body = request.body
   
     const company = {
+        title: body.title,
         name: body.name,
         location: body.location,
         url: body.url,

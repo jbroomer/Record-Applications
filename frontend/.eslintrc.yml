@@ -1,0 +1,11 @@
+extends:
+   - "airbnb"
+globals:
+   window: readonly
+   document: readonly
+rules:
+   object-curly-newline: 'off'
+   react/forbid-prop-types: 'off'
+   jsx-a11y/anchor-is-valid: 'off'
+   react/button-has-type: 'off'
+parser: babel-eslint
